@@ -1,0 +1,43 @@
+{% extends 'eshop/admin/base.html.twig' %}
+{% block title %}List of Products {% endblock %}
+{% block title_link %} 
+    <h1>Products list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>Details</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('eshop_admin_product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                <td>{{ product.label }}</td>
+                <td>{{ product.details }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eshop_admin_product_show', { 'id': product.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('eshop_admin_product_edit', { 'id': product.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('eshop_admin_product_new') }}">Create a new product</a>
+        </li>
+    </ul>
+{% endblock %}

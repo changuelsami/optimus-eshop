@@ -16,23 +16,29 @@ use AppBundle\Entity\Product;
 class CartController extends Controller
 {
      /**
-      * @Route("/cart/add/{product_id}", name="eshop_add_to_cart")
+      * @Route("/cart/add/{id}", name="eshop_add_to_cart")
       */
-     function addToCart($product_id) {     	
+     function addToCart(Product $prd) {     	
      	$session = new Session();
      	@$cart = $session->get('sess_cart');
-     	@$cart[$product_id] ++ ;
+     	@$cart[$prd->getId()] ++ ;
      	$session->set('sess_cart', $cart);
      	
      	// Retrouner à la page précédente
-     	$em   = $this->getDoctrine()->getManager();
-     	$repo = $em->getRepository(Product::class);
-     	$prd  = $repo->find($product_id);
      	$cat  = $prd->getCategory();
      	return $this->redirectToRoute('eshop_category', ['id'=> $cat->getId()]);
      }
 
      function cartCount() {
-     	
+     	$session = new Session();
+     	$cart = $session->get('sess_cart');
+     	var_dump($cart);
+     	$total = 0;
+     	if ($cart)
+	     	foreach ($cart as $id => $qty) 
+	     		$total += $qty;
+	     	
+
+     	return new Response("Test");
      }
 }

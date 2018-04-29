@@ -22,8 +22,9 @@
 						<p>{{product.details | raw}}</p>
 						<a 
 						href="{{ path('eshop_add_to_cart', 
-								     {'product_id': product.id}) 
-							  }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+								     {'id': product.id}) 
+							  }}" 
+						class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
 							Ajouter au panier
 						</a>
 					</div>

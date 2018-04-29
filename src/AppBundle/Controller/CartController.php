@@ -29,6 +29,7 @@ class CartController extends Controller
      	return $this->redirectToRoute('eshop_category', ['id'=> $cat->getId()]);
      }
 
+     // Renvoi le nbr total des produits du panier
      function cartCount() {
      	$session = new Session();
      	$cart = $session->get('sess_cart');
@@ -38,5 +39,12 @@ class CartController extends Controller
 	     		$total += $qty;
 	     	
      	return new Response($total);
+     }
+
+     /**
+      * @Route("/cart/", name="eshop_cart")
+      */
+     function cart() {
+     	return $this->render("eshop/front/cart.html.twig");
      }
 }

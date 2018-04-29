@@ -26,8 +26,9 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li>
-									<a href="panier.html">
-										<i class="fa fa-shopping-cart"></i> Panier ({{ render(controller(
+									<a href="{{path('eshop_cart')}}">
+										<i class="fa fa-shopping-cart"></i> 
+										Panier ({{ render(controller(
         'AppBundle\\Controller\\CartController::cartCount'
     )) }})
 									</a>

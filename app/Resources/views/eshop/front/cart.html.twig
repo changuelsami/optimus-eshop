@@ -4,12 +4,10 @@
 		<div class="container">
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
-					<li><a href="index.html">Home</a></li>
+					<li><a href="{{path('eshop_index')}}">Home</a></li>
 					<li class="active">Panier</li>
 				</ol>
 			</div>
-
-
 
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
@@ -24,57 +22,36 @@
 						</tr>
 					</thead>
 					<tbody>
+						
+						{% for prd in products %}
 						<tr>
 							<td class="cart_product">
-								<a href="produits.html?categorie=1"><img src="images/cart/one.png" alt=""></a>
+								<a href="#"><img src="/uploads/products/{{prd.image}}" width="100px" alt=""></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>ID: 1089772</p>
+								<h4><a href="">{{prd.label}}</a></h4>
+								<p>ID: {{prd.id}}</p>
 							</td>
 							<td class="cart_price">
-								<p>59</p>
+								<p>{{prd.price}}</p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 
-									<input id="qte_1" class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2" disabled="">
+									<input id="qte_1" class="cart_quantity_input" type="text" name="quantity" value="{{cart[prd.id]}}" autocomplete="off" size="2" disabled="">
 
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">40</p>
+								<p class="cart_total_price">{{cart[prd.id] * prd.price}}</p>
 							</td>
 							<td class="cart_delete">
 								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
+						{% endfor %}
 
-						<tr>
-							<td class="cart_product">
-								<a href="produits.html?categorie=2"><img src="images/cart/two.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2" disabled="">
-
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">60</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						
 
 					</tbody>
 				</table>
@@ -83,4 +60,27 @@
 
 		</div>
 	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+
+				</div>
+				<div class="col-sm-8">
+					<div class="total_area">
+						<ul>
+							<li>Sous total <span>{{total_ht}}</span></li>
+							<li>TVA (10%) <span>{{mnt_tva}}</span></li>
+							<li>Frais de transport <span>Gratuit</span></li>
+							<li>Total <span>{{total_ttc}}</span></li>
+						</ul>
+						<a class="btn btn-default update" href="#">Vider le panier</a> 
+
+						<a class="btn btn-default check_out pull-right" href="commander.html">Valider ma commande</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->	
 {% endblock %}

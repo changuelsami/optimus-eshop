@@ -45,6 +45,32 @@ class CartController extends Controller
       * @Route("/cart/", name="eshop_cart")
       */
      function cart() {
-     	return $this->render("eshop/front/cart.html.twig");
+     	$session = new Session();
+     	$cart = $session->get('sess_cart');
+     	$products = array();
+
+     	$em = $this->getDoctrine()->getManager();
+     	$repo = $em->getRepository(Product::class);
+
+     	$total_ht = 0;
+
+     	foreach ($cart as $product_id => $qty) {
+     		$prd = $repo->find($product_id);
+     		$products[] = $prd;
+     		$total_ht += $prd->getPrice() * $qty;
+     	}
+
+     	$mnt_tva = $total_ht * 10/100;
+     	$total_ttc = $total_ht + $mnt_tva;
+
+     	return $this->render("eshop/front/cart.html.twig",
+     		[
+     			'products' => $products,
+     			'cart'	   => $cart,
+     			'total_ht' => $total_ht,
+     			'mnt_tva'  => $mnt_tva,
+     			'total_ttc'=> $total_ttc
+     		]
+     	);
      }
 }

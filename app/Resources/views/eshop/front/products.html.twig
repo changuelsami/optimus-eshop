@@ -20,7 +20,10 @@
 				<div class="product-overlay">
 					<div class="overlay-content">
 						<p>{{product.details | raw}}</p>
-						<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+						<a 
+						href="{{ path('eshop_add_to_cart', 
+								     {'product_id': product.id}) 
+							  }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
 							Ajouter au panier
 						</a>
 					</div>

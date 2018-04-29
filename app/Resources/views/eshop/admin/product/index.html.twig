@@ -1,12 +1,17 @@
 {% extends 'eshop/admin/base.html.twig' %}
 {% block title %}List of Products {% endblock %}
-{% block title_link %} 
-    <h1>Products list</h1>
+    {% block title_link %} 
+    <small> 
+        <a href="{{path('eshop_admin_product_new')}}">Add new</a> 
+    </small>
+{% endblock %}  
+{% block body %} 
 
     <table>
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Image</th>
                 <th>Label</th>
                 <th>Details</th>
                 <th>Price</th>
@@ -17,8 +22,13 @@
         {% for product in products %}
             <tr>
                 <td><a href="{{ path('eshop_admin_product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                <td>
+                    {% if product.image is not null %}
+                    <img src="/uploads/products/{{ product.image }}" style="width: 50px;" /> 
+                    {% endif %}
+                </td>
                 <td>{{ product.label }}</td>
-                <td>{{ product.details }}</td>
+                <td>{{ product.details | raw }}</td>
                 <td>{{ product.price }}</td>
                 <td>
                     <ul>

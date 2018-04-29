@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 use AppBundle\Entity\Category;
 
@@ -44,6 +45,7 @@ class CategoryController extends Controller
                     'required' => false, 
                     'config'   => ['toolbar' => 'basic']
                 ] )
+            ->add('image', FileType::class, ['required' => false])
             ->add('save', SubmitType::class)
             ->getForm();
 
@@ -51,6 +53,16 @@ class CategoryController extends Controller
         $form->handleRequest($req);
         if($form->isSubmitted())
         {
+            $image = $cat->getImage(); // object
+            if($image != null)
+            {
+                // move the uploadED file
+                $image->move( $this->get("kernel")->getProjectDir() . "/web/uploads/categories/", 
+                              $image->getClientOriginalName() );
+                $cat->setImage( $image->getClientOriginalName() );
+            }
+            
+
             // Persist the data (the object)
             $em = $this->getDoctrine()->getManager();
             $em->persist($cat);
@@ -82,6 +94,10 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $cat = $em->getRepository(Category::class)->find($id);
+
+        // Remplacer le nom du fichier par un objet
+        $old_image = $this->get('kernel')->getProjectDir() . "/web/uploads/categories/" . $cat->getImage();
+        $cat->setImage( new \Symfony\Component\HttpFoundation\File\File($old_image, false) );
         
         // Create a form
         $form = $this->createFormBuilder($cat)
@@ -91,6 +107,7 @@ class CategoryController extends Controller
                     'required' => false, 
                     'config'   => ['toolbar' => 'basic']
                 ] )
+            ->add('image', FileType::class, ['required' => false])
             ->add('save', SubmitType::class)
             ->getForm();
 
@@ -98,6 +115,16 @@ class CategoryController extends Controller
         $form->handleRequest($req);
         if($form->isSubmitted())
         {
+
+            $image = $cat->getImage(); // object
+            if($image != null)
+            {
+                // move the uploadED file
+                $image->move( $this->get("kernel")->getProjectDir() . "/web/uploads/categories/", 
+                              $image->getClientOriginalName() );
+                $cat->setImage( $image->getClientOriginalName() );
+            }   
+                     
             // Persist the data (the object)
             $em = $this->getDoctrine()->getManager();
             $em->persist($cat);

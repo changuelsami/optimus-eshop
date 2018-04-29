@@ -1,0 +1,49 @@
+{
+    "name": "egeloen/ckeditor-bundle",
+    "type": "symfony-bundle",
+    "description": "Provides a CKEditor integration for your Symfony2 Project.",
+    "keywords": [ "ckeditor" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eric GELOEN",
+            "email": "geloen.eric@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+        "egeloen/json-builder": "^2.0|^3.0",
+        "symfony/dependency-injection": "^2.7|^3.0",
+        "symfony/form": "^2.7|^3.0",
+        "symfony/framework-bundle": "^2.7|^3.0"
+    },
+    "require-dev": {
+        "composer/composer": "^1.0",
+        "friendsofphp/php-cs-fixer": "^2.0",
+        "phpunit/phpunit": "^5.0|^6.0",
+        "sensio/distribution-bundle": "^3.0.12|^4.0|^5.0",
+        "symfony/asset": "^2.7|^3.0",
+        "symfony/console": "^2.7|^3.0",
+        "symfony/phpunit-bridge": "^2.7|^3.0",
+        "symfony/templating": "^2.7|^3.0",
+        "symfony/twig-bridge": "^2.7|^3.0",
+        "symfony/yaml": "^2.7|^3.0",
+        "twig/twig": "^1.12"
+    },
+    "suggest": {
+        "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously",
+        "sensio/distribution-bundle": "Allows to install CKEditor via a script handler",
+        "symfony/asset": "Allows to rewrite/version assets",
+        "symfony/templating": "Allows to use PHP templates",
+        "symfony/twig-bridge": "Allows to use Twig templates",
+        "twig/twig": "Allows to use Twig templates"
+    },
+    "autoload": {
+        "psr-4": { "Ivory\\CKEditorBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "6.0-dev"
+        }
+    }
+}

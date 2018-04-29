@@ -48,6 +48,12 @@ class Product
      */
      private $category;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
 
     /**
      * Get id
@@ -153,5 +159,29 @@ class Product
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Product
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

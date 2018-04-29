@@ -1,0 +1,36 @@
+{# /eshop/front/base.html.twig #}
+{% extends 'eshop/front/list-layout.html.twig' %}
+{% block left_title %} {{ category.label }} {% endblock %}
+{% block left_content %} {{ category.details | raw }}  {% endblock %}
+{% block right_title %}Les produits de la catégorie <u>{{ category.label }}</u>{% endblock %}
+{% block right_content %}
+	
+	{% for product in products %}
+	<div class="col-sm-4">
+		<div class="product-image-wrapper">
+			<div class="single-products">
+				<div class="productinfo text-center">
+					<img src="/uploads/products/{{ product.image }}" height="160px" />
+					<h2>{{product.price}} TND</h2>
+					<p>{{product.label}}</p>
+					<span class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+						Ajouter au panier
+					</span>
+				</div>
+				<div class="product-overlay">
+					<div class="overlay-content">
+						<p>{{product.details | raw}}</p>
+						<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>
+							Ajouter au panier
+						</a>
+					</div>
+
+				</div>										
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+
+
+{% endblock %}
+

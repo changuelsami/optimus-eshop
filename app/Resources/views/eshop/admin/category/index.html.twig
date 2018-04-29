@@ -10,6 +10,7 @@
 	<thead>
 		<tr>
 			<th>ID</th>
+			<th>Image</th>
 			<th>Label</th>
 			<th>Details</th>
 			<th>Action</th>
@@ -20,8 +21,13 @@
 	{% for line in items %}
 		<tr>
 			<td>{{ line.id }}</td>
+			<td> 
+				{% if line.image is not null %}
+				<img src="/uploads/categories/{{ line.image }}" style="width: 50px;" /> 
+				{% endif %}
+			</td>
 			<td>{{ line.label }}</td>
-			<td>{{ line.details | raw }}</td>
+			<td>{{ line.details | slice(0,100) | raw }}</td>
 			<td>
 				<a href="{{ path('admin_category_update', {'id' : line.id}) }}" class="glyphicon glyphicon-pencil"></a>
 				<a href="{{ path('admin_category_remove', {'id' : line.id}) }}" class="glyphicon glyphicon-remove-circle remove-item"></a>

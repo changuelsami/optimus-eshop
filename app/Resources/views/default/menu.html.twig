@@ -1,9 +1,0 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-<h1>Intro à Symfony</h1>
-<a href="{{path('homepage')}}">Symfony home</a> <br>
-<a href="{{path('hello', {'nom' : 'batman'})}}">Hello batman</a> <br>
-<a href="{{path('random', {'a' : '1', 'b' : '100'})}}">Random number entre 1 et 100</a> <br>
-{% endblock %}
-

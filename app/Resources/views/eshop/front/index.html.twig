@@ -1,0 +1,23 @@
+{# /eshop/front/base.html.twig #}
+{% extends 'eshop/front/list-layout.html.twig' %}
+{% block left_title %}Présentation{% endblock %}
+{% block left_content %}Bienvenue au site Affable Beans. Nous vous proposons des produits frais et bios sans aromes ni conservateurs. A droite vous avez la liste de nos catégories de produits. Cliquer sur une catégorie pour avoir la liste des produits de cette catégorie. Ensuite ajouter le produit de votre choix au panier et validez votre commande. {% endblock %}
+{% block right_title %}Les catégories de produits{% endblock %}
+{% block right_content %}
+	
+	{% for category in categories %}
+	<div class="col-sm-4">
+		<div class="product-image-wrapper">
+			<div class="single-products">
+				<div class="productinfo text-center">
+					<img src="/uploads/categories/{{ category.image }}" height="160px" />
+					<a href="{{path('eshop_category', {'id': category.id})}}" class="btn btn-default add-to-cart">{{category.label}}</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+
+
+{% endblock %}
+

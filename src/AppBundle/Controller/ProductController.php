@@ -44,11 +44,21 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $product->getImage(); // object
+            if($image != null)
+            {
+                // move the uploadED file
+                $image->move( $this->get("kernel")->getProjectDir() . "/web/uploads/products/", 
+                              $image->getClientOriginalName() );
+                $product->setImage( $image->getClientOriginalName() );
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
 
-            return $this->redirectToRoute('eshop_admin_product_show', array('id' => $product->getId()));
+            return $this->redirectToRoute('eshop_admin_product_index', array('id' => $product->getId()));
         }
 
         return $this->render('eshop/admin/product/new.html.twig', array(
@@ -81,11 +91,26 @@ class ProductController extends Controller
      */
     public function editAction(Request $request, Product $product)
     {
+        ///////// IMAGE //////////
+        $old_image = $this->get('kernel')->getProjectDir() . "/web/uploads/products/" . $product->getImage();
+        $product->setImage( new \Symfony\Component\HttpFoundation\File\File($old_image, false) );
+
         $deleteForm = $this->createDeleteForm($product);
         $editForm = $this->createForm('AppBundle\Form\ProductType', $product);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+             ///////// IMAGE //////////
+            $image = $product->getImage(); // object
+            if($image != null)
+            {
+                // move the uploadED file
+                $image->move( $this->get("kernel")->getProjectDir() . "/web/uploads/products/", 
+                              $image->getClientOriginalName() );
+                $product->setImage( $image->getClientOriginalName() );
+            } 
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('eshop_admin_product_edit', array('id' => $product->getId()));
@@ -102,7 +127,7 @@ class ProductController extends Controller
      * Deletes a product entity.
      *
      * @Route("/{id}", name="eshop_admin_product_delete")
-     * @Method("DELETE")
+     * @Method("GET")
      */
     public function deleteAction(Request $request, Product $product)
     {

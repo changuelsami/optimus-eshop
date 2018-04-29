@@ -35,6 +35,13 @@ class Category
      */
     private $details;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
 
     /**
      * Get id
@@ -96,5 +103,29 @@ class Category
 
     public function __toString() {
         return $this->label;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Category
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

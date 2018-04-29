@@ -32,13 +32,11 @@ class CartController extends Controller
      function cartCount() {
      	$session = new Session();
      	$cart = $session->get('sess_cart');
-     	var_dump($cart);
      	$total = 0;
      	if ($cart)
 	     	foreach ($cart as $id => $qty) 
 	     		$total += $qty;
 	     	
-
-     	return new Response("Test");
+     	return new Response($total);
      }
 }

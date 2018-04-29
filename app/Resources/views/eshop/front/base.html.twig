@@ -27,11 +27,11 @@
 							<ul class="nav navbar-nav">
 								<li>
 									<a href="panier.html">
-										<i class="fa fa-shopping-cart"></i> Panier (0)
-									</a>
-									{{ render(controller(
+										<i class="fa fa-shopping-cart"></i> Panier ({{ render(controller(
         'AppBundle\\Controller\\CartController::cartCount'
-    )) }}
+    )) }})
+									</a>
+									
 								</li>
 							</ul>
 						</div>

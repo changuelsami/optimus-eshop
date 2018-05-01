@@ -46,7 +46,10 @@
 								<p class="cart_total_price">{{cart[prd.id] * prd.price}}</p>
 							</td>
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href="{{path('eshop_remove_from_cart', {'id': prd.id})}}"><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" 
+								href="{{path('eshop_remove_from_cart', {'id': prd.id})}}">
+								<i class="fa fa-times"></i>
+								</a>
 							</td>
 						</tr>
 						{% endfor %}
@@ -75,7 +78,7 @@
 							<li>Frais de transport <span>Gratuit</span></li>
 							<li>Total <span>{{total_ttc}}</span></li>
 						</ul>
-						<a class="btn btn-default update" href="#">Vider le panier</a> 
+						<a class="btn btn-default update" href="{{path('eshop_clear_cart')}}">Vider le panier</a> 
 
 						<a class="btn btn-default check_out pull-right" href="commander.html">Valider ma commande</a>
 					</div>

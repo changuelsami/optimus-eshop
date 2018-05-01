@@ -56,11 +56,12 @@ class CartController extends Controller
 
           // Calcul du total HT, mnt TVA et total TTC
           // On ne doit pas laisser la vue faire le calcul
-     	foreach ($cart as $product_id => $qty) {
-     		$prd = $repo->find($product_id);
-     		$products[] = $prd;
-     		$total_ht += $prd->getPrice() * $qty;
-     	}
+          if ($cart)
+          	foreach ($cart as $product_id => $qty) {
+          		$prd = $repo->find($product_id);
+          		$products[] = $prd;
+          		$total_ht += $prd->getPrice() * $qty;
+          	}
 
      	$mnt_tva = $total_ht * 10/100;
      	$total_ttc = $total_ht + $mnt_tva;
@@ -68,7 +69,7 @@ class CartController extends Controller
      	return $this->render("eshop/front/cart.html.twig",
      		[
      			'products' => $products,
-     			'cart'	   => $cart,
+     			'cart'	 => $cart,
      			'total_ht' => $total_ht,
      			'mnt_tva'  => $mnt_tva,
      			'total_ttc'=> $total_ttc
@@ -88,4 +89,14 @@ class CartController extends Controller
           // Retrouner au panier
           return $this->redirectToRoute('eshop_cart');
      }
+
+     /**
+      * @Route("/cart/clear/", name="eshop_clear_cart")
+      */
+     function clearCart() {      
+          $session = new Session();
+          $session->clear('sess_cart');
+          // Retrouner au panier
+          return $this->redirectToRoute('eshop_cart');
+     }     
 }

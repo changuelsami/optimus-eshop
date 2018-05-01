@@ -54,6 +54,8 @@ class CartController extends Controller
 
      	$total_ht = 0;
 
+          // Calcul du total HT, mnt TVA et total TTC
+          // On ne doit pas laisser la vue faire le calcul
      	foreach ($cart as $product_id => $qty) {
      		$prd = $repo->find($product_id);
      		$products[] = $prd;
@@ -72,5 +74,18 @@ class CartController extends Controller
      			'total_ttc'=> $total_ttc
      		]
      	);
+     }
+
+     /**
+      * @Route("/cart/remove/{id}", name="eshop_remove_from_cart")
+      */
+     function removeFromCart($id) {      
+          $session = new Session();
+          $cart = $session->get('sess_cart');
+          unset($cart[$id]); // Remove item from row
+          $session->set('sess_cart', $cart);
+          
+          // Retrouner au panier
+          return $this->redirectToRoute('eshop_cart');
      }
 }

@@ -13,6 +13,7 @@ class DefaultController extends Controller
     */
     public function indexAction(Request $request)
     {
+        //return $this->redirectToRoute('eshop_index');
         return $this->render('default/index.html.twig');
     }   
 }

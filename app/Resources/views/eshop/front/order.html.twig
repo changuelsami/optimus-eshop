@@ -19,31 +19,16 @@
 
 						<div class="col-sm-12">
 							<div class="signup-form"><!--sign up form-->
-								
-								<form action="merci.html">
-									<h2>Données de facturation :</h2>
-
-									<input type="text" placeholder="Votre nom & prénom" required="required" />
-									<input type="email" placeholder="Email Address" required="required"/>
-									<input type="text" placeholder="Adresse" required="required"/>
-
-
-									<h2>Modes de paiement</h2>
-									<div class="payment-options">
-										<span>
-											<label><input type="radio" name="mode_paiement" value="1"> Virement bancaire</label>
-										</span>
-										<span>
-											<label><input type="radio" name="mode_paiement" value="2"> Paiement par chèque</label>
-										</span>
-										<span>
-											<label><input type="radio" name="mode_paiement" value="3"> Paypal</label>
-										</span>
-										<br/>
-										<button type="submit" class="btn btn-default">Valider ma commande</button>
-									</div>
-								</form>
-								<p></p>
+								{{form_start(form)}}
+								<h2>Données de facturation :</h2>
+								{{form_widget(form.name)}}
+								{{form_widget(form.email)}}
+								{{form_widget(form.address)}}
+								<h2>Modes de paiement</h2>
+								{{form_widget(form.paiement)}}
+								<p>&nbsp;</p>
+								<button type="submit" class="btn btn-default">Valider ma commande</button>
+								{{form_end(form)}}
 							</div><!--/sign up form-->
 						</div>
 					</div>

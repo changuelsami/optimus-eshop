@@ -78,9 +78,11 @@
 							<li>Frais de transport <span>Gratuit</span></li>
 							<li>Total <span>{{total_ttc}}</span></li>
 						</ul>
-						<a class="btn btn-default update" href="{{path('eshop_clear_cart')}}">Vider le panier</a> 
+						<a class="btn btn-default update" 
+						href="{{path('eshop_clear_cart')}}">Vider le panier</a> 
 
-						<a class="btn btn-default check_out pull-right" href="commander.html">Valider ma commande</a>
+						<a class="btn btn-default check_out pull-right" 
+						href="{{path('eshop_order')}}">Valider ma commande</a>
 					</div>
 				</div>
 			</div>

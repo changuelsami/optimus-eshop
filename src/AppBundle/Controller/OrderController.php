@@ -8,17 +8,38 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 /**
  * @Route("eshop")
  */
 class OrderController extends Controller
 {
     /**
-     * @Route("/order/", name="eshop_eshop")
+     * @Route("/order/", name="eshop_order")
      */
     public function order()
     {
-    	
+    	// Build oder form       
+        $form = $this->createFormBuilder()
+                    ->add('name'    , TextType::class , ['attr' => ['placeholder'=>'Votre nom & prénom']])
+                    ->add('email'   , EmailType::class, ['attr' => ['placeholder'=>'Votre email']])
+                    ->add('address' , TextType::class , ['attr' => ['placeholder'=>'Votre adresse']])
+                    ->add('paiement', ChoiceType::class, 
+                        [ 'choices' => 
+                            [
+                                'Virement bancaire'  => "VRMT",
+                                'Paiment par chèque' => "CHQ",
+                                'Paypal'             => "PAYPAL"
+                            ],
+                            'expanded' => true,
+                            'label_attr' => ['class' => 'radio-inline'],
+                        ])
+                    ->getForm();
+        
+        return $this->render("eshop/front/order.html.twig", ['form' => $form->createView()]);
     }
 
 }

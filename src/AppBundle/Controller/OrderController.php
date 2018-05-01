@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Product;
+use AppBundle\Entity\Commande;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -22,8 +23,9 @@ class OrderController extends Controller
      */
     public function order()
     {
-    	// Build oder form       
-        $form = $this->createFormBuilder()
+    	// Build oder form    
+        $commande = new Commande();  
+        $form = $this->createFormBuilder($commande)
                     ->add('name'    , TextType::class , ['attr' => ['placeholder'=>'Votre nom & prénom']])
                     ->add('email'   , EmailType::class, ['attr' => ['placeholder'=>'Votre email']])
                     ->add('address' , TextType::class , ['attr' => ['placeholder'=>'Votre adresse']])

@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+use Symfony\Component\HttpFoundation\Session\Session;
+
 /**
  * @Route("eshop")
  */
@@ -44,6 +46,7 @@ class OrderController extends Controller
         
         $form->handleRequest($request);
         if($form->isSubmitted()) {
+            $commande->setDate(new \DateTime()); // don't forget the "\"
             $em = $this->getDoctrine()->getManager();
             // Sauvegarder la commande (données client)
             $em->persist($commande);
@@ -64,17 +67,17 @@ class OrderController extends Controller
             }
             $em->flush();
             $num_cmd = $commande->getId();
-            return $this->redirectToRoute('eshop_merci', ['num_cmd' => $num_cmd]);
+            return $this->redirectToRoute('eshop_merci', ['order_id' => $num_cmd]);
         }
 
         return $this->render("eshop/front/order.html.twig", ['form' => $form->createView()]);
     }
 
     /**
-     * @Route('/merci/{order_id', name="eshop_merci")
+     * @Route("/merci/{order_id}", name="eshop_merci")
      */
     public function merci($order_id) {
-        
+        return $this->render('eshop/front/merci.html.twig', ['num_cmd' => $order_id]);
     }
 
 }

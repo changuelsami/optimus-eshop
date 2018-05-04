@@ -42,7 +42,7 @@ class ProductCommande
      private $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Commande")
+     * @ORM\ManyToOne(targetEntity="Commande", inversedBy="ligneCommande")
      * @ORM\JoinColumn(nullable=false)
      */
      private $commande;     

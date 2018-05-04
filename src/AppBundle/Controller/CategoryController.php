@@ -21,7 +21,7 @@ class CategoryController extends Controller
     /**
     * @Route("/", name="admin_category_index")
     */
-    public function list()
+    public function liste()
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository(Category::class);

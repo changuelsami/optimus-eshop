@@ -1,0 +1,39 @@
+{% extends 'eshop/admin/base.html.twig' %}
+{% block title %}List of Orders {% endblock %}
+  
+{% block body %} 
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Paiement</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            <tr>
+                <td><a href="{{ path('eshop_admin_order_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
+                <td>{{ commande.name }}</td>
+                <td>{{ commande.email }}</td>
+                <td>{{ commande.address }}</td>
+                <td>{{ commande.paiement }}</td>
+                <td>{% if commande.date %}{{ commande.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('eshop_admin_order_show', { 'id': commande.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

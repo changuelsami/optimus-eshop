@@ -80,4 +80,34 @@ class OrderController extends Controller
         return $this->render('eshop/front/merci.html.twig', ['num_cmd' => $order_id]);
     }
 
+
+
+    /**
+     * Lists all commande entities.
+     *
+     * @Route("/admin/order/", name="eshop_admin_order_index")
+     */
+    public function ordersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $commandes = $em->getRepository('AppBundle:Commande')->findAll();
+
+        return $this->render('eshop/admin/commande/index.html.twig', array(
+            'commandes' => $commandes,
+        ));
+    }
+
+    /**
+     * Finds and displays a commande entity.
+     *
+     * @Route("/admin/order/{id}", name="eshop_admin_order_show")
+     */
+    public function detailsAction(Commande $commande)
+    {
+        return $this->render('eshop/admin/commande/show.html.twig', array(
+            'commande' => $commande,
+        ));
+    }    
+
 }

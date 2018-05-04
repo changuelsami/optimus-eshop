@@ -191,47 +191,4 @@ class Commande
     {
         return $this->date;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ligneCommande = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add ligneCommande.
-     *
-     * @param \AppBundle\Entity\ProductCommande $ligneCommande
-     *
-     * @return Commande
-     */
-    public function addLigneCommande(\AppBundle\Entity\ProductCommande $ligneCommande)
-    {
-        $this->ligneCommande[] = $ligneCommande;
-
-        return $this;
-    }
-
-    /**
-     * Remove ligneCommande.
-     *
-     * @param \AppBundle\Entity\ProductCommande $ligneCommande
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeLigneCommande(\AppBundle\Entity\ProductCommande $ligneCommande)
-    {
-        return $this->ligneCommande->removeElement($ligneCommande);
-    }
-
-    /**
-     * Get ligneCommande.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLigneCommande()
-    {
-        return $this->ligneCommande;
-    }
 }
